@@ -1,0 +1,36 @@
+server:
+  port: 8080
+
+spring:
+  profiles:
+    active: default
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQL94Dialect
+    show-sql: true
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        show-sql: true
+        format-sql: true
+        use_sql_comments: true
+            enable: true
+  datasource:
+    driverClassName: org.postgresql.Driver
+    #driverClassName: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/vending?currentSchema=vdn
+    #url: jdbc:postgresql://localhost:5432/sklbx?currentSchema=be
+    username: postgres
+    password: 1234
+    hikari:
+      connectionTimeout: 30000
+      idleTimeout: 600000
+      maxLifetime: 7190000
+      minimumIdle: 2
+      maximumPoolSize: 50
+    jackson:
+      #форматирование дат в ISO формате (требования фронта, иначе не работает Java 8 Date Api)
+      date-format: com.fasterxml.jackson.databind.util.ISO8601DateFormat
+      serialization:
+        FAIL_ON_EMPTY_BEANS: false #отсутствие свойств не приводит к ошибке
+      default-property-inclusion: NON_NULL #не сериализовывать null поля
