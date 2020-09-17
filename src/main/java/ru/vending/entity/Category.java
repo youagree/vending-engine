@@ -16,7 +16,7 @@ import java.util.List;
 public class Category {
 
     @Id
-    @Column(name = "categoryId")
+    @Column(name = "category_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -26,7 +26,7 @@ public class Category {
     @Column
     private String image;
 
-    @OneToMany(mappedBy = "categoryId")
+    @OneToMany(mappedBy = "category_id")
     @ToString.Exclude
     private List<Product> products;
 

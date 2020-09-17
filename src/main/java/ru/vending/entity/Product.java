@@ -15,14 +15,14 @@ import javax.persistence.*;
 public class Product {
 
     @Id
-    @Column (name = "productId")
+    @Column (name = "product_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "categoryId", nullable = false)
+    @JoinColumn(name = "category_id", nullable = false)
     @ToString.Exclude
-    private Category categoryId;
+    private Category category_id;
 
     @Column
     private String name;
