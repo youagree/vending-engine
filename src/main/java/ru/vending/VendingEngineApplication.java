@@ -1,8 +1,3 @@
-/*
- * VTB Group. Do not reproduce without permission in writing.
- * Copyright (c) 2020 VTB Group. All rights reserved.
- */
-
 package ru.vending;
 
 import org.springframework.boot.SpringApplication;
