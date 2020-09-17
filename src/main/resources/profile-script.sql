@@ -6,10 +6,10 @@
 -- create schema
 CREATE SCHEMA vdn;
 
-CREATE USER postgres1 WITH password '1234';
+CREATE USER vdn_user WITH password 'vdn';
 
-ALTER USER postgres1 WITH SUPERUSER;
+ALTER USER vdn_user WITH SUPERUSER;
 
-GRANT USAGE ON SCHEMA vdn TO postgres1;
+GRANT USAGE ON SCHEMA vdn TO vdn_user;
 
-ALTER SCHEMA vdn OWNER TO postgres1;
+ALTER SCHEMA vdn OWNER TO vdn_user;
