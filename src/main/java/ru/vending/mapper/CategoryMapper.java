@@ -1,12 +1,12 @@
 package ru.vending.mapper;
 
 import org.mapstruct.Mapper;
-import ru.vending.dto.CategoryDTO;
+import ru.vending.dto.CategoryDto;
 import ru.vending.entity.Category;
 
-@Mapper
+@Mapper(uses = ProductMapper.class)
 public interface CategoryMapper {
 
-    CategoryDTO map(Category category);
+    CategoryDto map(Category category);
 
 }

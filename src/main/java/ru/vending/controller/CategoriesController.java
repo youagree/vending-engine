@@ -3,7 +3,7 @@ package ru.vending.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.vending.dto.CategoryDTO;
+import ru.vending.dto.CategoryDto;
 import ru.vending.service.CategoriesService;
 
 import java.util.List;
@@ -20,7 +20,7 @@ public class CategoriesController {
     }
 
     @GetMapping
-    public ResponseEntity<List<CategoryDTO>> getCategories() {
+    public ResponseEntity<List<CategoryDto>> getCategories() {
         return ResponseEntity.ok(categoriesService.getCategories());
     }
     

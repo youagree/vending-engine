@@ -2,7 +2,7 @@ package ru.vending.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.vending.dto.CategoryDTO;
+import ru.vending.dto.CategoryDto;
 import ru.vending.entity.Category;
 import ru.vending.mapper.CategoryMapper;
 import ru.vending.repository.CategoriesRepository;
@@ -22,7 +22,7 @@ public class CategoriesService {
         this.categoryMapper = categoryMapper;
     }
 
-    public List<CategoryDTO> getCategories() {
+    public List<CategoryDto> getCategories() {
         List<Category> categories = categoriesRepository.findAll();
         return categories.stream().
                 map(categoryMapper::map).
