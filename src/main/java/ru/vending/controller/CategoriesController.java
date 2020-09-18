@@ -23,5 +23,10 @@ public class CategoriesController {
     public ResponseEntity<List<CategoryDto>> getCategories() {
         return ResponseEntity.ok(categoriesService.getCategories());
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<CategoryDto> getCategory(@PathVariable Long id) {
+        return ResponseEntity.ok(categoriesService.getCategory(id));
+    }
     
 }

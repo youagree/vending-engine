@@ -29,5 +29,9 @@ public class CategoriesService {
                 collect(Collectors.toList());
     }
 
+    public CategoryDto getCategory(Long id) {
+        Category category = categoriesRepository.findById(id).orElse(null);
+        return categoryMapper.map(category);
+    }
 
 }
