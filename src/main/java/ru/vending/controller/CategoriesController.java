@@ -9,7 +9,7 @@ import ru.vending.service.CategoriesService;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "ui/vending/categories")
+@RequestMapping(path = "/ui/vending/categories")
 public class CategoriesController {
 
     private final CategoriesService categoriesService;
