@@ -14,9 +14,7 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import ru.vending.dto.CategoryDto;
-import ru.vending.entity.Category;
-import ru.vending.entity.Product;
-import ru.vending.mapper.CategoryMapper;
+import ru.vending.dto.ProductDto;
 import ru.vending.service.CategoriesService;
 
 import java.util.ArrayList;
@@ -35,49 +33,42 @@ class CategoriesControllerTest {
     @MockBean
     private CategoriesService categoriesService;
 
-    @MockBean
-    private CategoryMapper categoryMapper;
-
     @Test
     void getAllCategories() throws Exception {
-        Category mockCategory1 = new Category();
+        CategoryDto mockCategory1 = new CategoryDto();
         mockCategory1.setId(1L);
         mockCategory1.setName("drinks");
         mockCategory1.setImage("C:\\Users\\user\\Desktop\\category1.jpg");
         mockCategory1.setProducts(Arrays.asList(
-                new Product(
+                new ProductDto(
                         1L,
-                        mockCategory1,
                         "water",
                         "mineral water",
                         50,
                         "C:\\Users\\user\\Desktop\\product1.jpg",
                         5),
-                new Product(
+                new ProductDto(
                         2L,
-                        mockCategory1,
                         "coca-cola",
                         "carbonated drink",
                         55,
                         "C:\\Users\\user\\Desktop\\product2.jpg",
                         2)));
 
-        Category mockCategory2 = new Category();
+        CategoryDto mockCategory2 = new CategoryDto();
         mockCategory2.setId(1L);
         mockCategory2.setName("chocolate");
         mockCategory2.setImage("C:\\Users\\user\\Desktop\\category2.jpg");
-        mockCategory1.setProducts(Arrays.asList(
-                new Product(
+        mockCategory2.setProducts(Arrays.asList(
+                new ProductDto(
                         3L,
-                        mockCategory2,
                         "ritter sport",
                         "chocolate bar",
                         110,
                         "C:\\Users\\user\\Desktop\\product3.jpg",
                         15),
-                new Product(
+                new ProductDto(
                         4L,
-                        mockCategory2,
                         "mars minis",
                         "chocolate candies",
                         40,
@@ -85,8 +76,8 @@ class CategoriesControllerTest {
                         3)));
 
         List<CategoryDto> categoriesDto = new ArrayList<>();
-        categoriesDto.add(categoryMapper.map(mockCategory1));
-        categoriesDto.add(categoryMapper.map(mockCategory2));
+        categoriesDto.add(mockCategory1);
+        categoriesDto.add(mockCategory2);
 
         Mockito.when(categoriesService.getCategories()).thenReturn(categoriesDto);
 
@@ -94,15 +85,42 @@ class CategoriesControllerTest {
         RequestBuilder requestBuilder = MockMvcRequestBuilders.get(URI);
 
         MvcResult result = mockMvc.perform(requestBuilder).andReturn();
-
         String expectedJson = mapToJson(categoriesDto);
         String outputInJson = result.getResponse().getContentAsString();
         assertThat(outputInJson).isEqualTo(expectedJson);
     }
 
     @Test
-    void getCategory() {
+    void getCategory() throws Exception {
+        CategoryDto mockCategory = new CategoryDto();
+        mockCategory.setId(1L);
+        mockCategory.setName("drinks");
+        mockCategory.setImage("C:\\Users\\user\\Desktop\\category1.jpg");
+        mockCategory.setProducts(Arrays.asList(
+                new ProductDto(
+                        1L,
+                        "water",
+                        "mineral water",
+                        50,
+                        "C:\\Users\\user\\Desktop\\product1.jpg",
+                        5),
+                new ProductDto(
+                        2L,
+                        "coca-cola",
+                        "carbonated drink",
+                        55,
+                        "C:\\Users\\user\\Desktop\\product2.jpg",
+                        2)));
 
+        Mockito.when(categoriesService.getCategoryById(Mockito.anyLong())).thenReturn(mockCategory);
+
+        String URI = "/ui/vending/categories/1";
+        RequestBuilder requestBuilder = MockMvcRequestBuilders.get(URI);
+
+        MvcResult result = mockMvc.perform(requestBuilder).andReturn();
+        String expectedJson = mapToJson(mockCategory);
+        String outputInJson = result.getResponse().getContentAsString();
+        assertThat(outputInJson).isEqualTo(expectedJson);
     }
 
     private String mapToJson(Object object) throws JsonProcessingException {
