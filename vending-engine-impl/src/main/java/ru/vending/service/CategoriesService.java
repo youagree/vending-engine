@@ -3,11 +3,14 @@ package ru.vending.service;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.DigestUtils;
 import ru.vending.dto.CategoryDto;
 import ru.vending.entity.Category;
 import ru.vending.mapper.CategoryMapper;
 import ru.vending.repository.CategoriesRepository;
 import javax.persistence.EntityNotFoundException;
+import java.sql.Connection;
+import java.sql.Statement;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -37,5 +40,10 @@ public class CategoriesService {
         log.info("Founded category: {}", category.getName());
         return categoryMapper.map(category);
     }
+
+    private static Connection connection;
+    private static Statement statement;
+
+
 
 }

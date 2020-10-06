@@ -3,7 +3,9 @@ package ru.vending.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import ru.vending.dto.AuthDto;
 import ru.vending.dto.CategoryDto;
+import ru.vending.service.AuthService;
 import ru.vending.service.CategoriesService;
 
 import java.util.List;
@@ -13,10 +15,12 @@ import java.util.List;
 public class CategoriesController {
 
     private final CategoriesService categoriesService;
+    private final AuthService authService;
 
     @Autowired
-    public CategoriesController(CategoriesService categoriesService) {
+    public CategoriesController(CategoriesService categoriesService, AuthService authService) {
         this.categoriesService = categoriesService;
+        this.authService = authService;
     }
 
     @GetMapping
@@ -27,6 +31,11 @@ public class CategoriesController {
     @GetMapping("/{id}")
     public ResponseEntity<CategoryDto> getCategory(@PathVariable Long id) {
         return ResponseEntity.ok(categoriesService.getCategoryById(id));
+    }
+
+    @GetMapping("/test")
+    public ResponseEntity<AuthDto> getAuthDto() {
+        return ResponseEntity.ok(authService.getAuthDto());
     }
     
 }
