@@ -12,6 +12,12 @@
     <artifactId>vending-engine-impl</artifactId>
 
     <dependencies>
+
+        <dependency>
+            <groupId>ru.vending</groupId>
+            <artifactId>vending-kit-box-integration-lib</artifactId>
+        </dependency>
+
         <!-- base starters -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
