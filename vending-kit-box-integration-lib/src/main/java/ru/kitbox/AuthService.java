@@ -1,13 +1,9 @@
 package ru.kitbox;
 
-import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
-import ru.vending.dto.AuthDto;
-import ru.vending.entity.Auth;
-import ru.vending.mapper.AuthMapper;
 
 import java.util.Date;
 
