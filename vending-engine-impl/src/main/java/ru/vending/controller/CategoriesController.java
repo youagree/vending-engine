@@ -2,10 +2,13 @@ package ru.vending.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-import ru.vending.dto.AuthDto;
-import ru.vending.dto.CategoryDto;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import ru.vending.service.AuthService;
+import ru.vending.dto.AuthDtoWrapper;
+import ru.vending.dto.CategoryDto;
 import ru.vending.service.CategoriesService;
 
 import java.util.List;
@@ -34,8 +37,8 @@ public class CategoriesController {
     }
 
     @GetMapping("/test")
-    public ResponseEntity<AuthDto> getAuthDto() {
+    public ResponseEntity<AuthDtoWrapper> getAuthDto() {
         return ResponseEntity.ok(authService.getAuthDto());
     }
-    
+
 }
