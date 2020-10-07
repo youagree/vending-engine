@@ -28,16 +28,19 @@ public class CategoriesController {
 
     @GetMapping
     public ResponseEntity<List<CategoryDto>> getAllCategories() {
+        // TODO получать все категории из текущей матрицы продуктов
         return ResponseEntity.ok(categoriesService.getCategories());
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<CategoryDto> getCategory(@PathVariable Long id) {
+        // TODO Получать определенную категорию из списка категорий по идентификатору
         return ResponseEntity.ok(categoriesService.getCategoryById(id));
     }
 
     @GetMapping("/test")
     public ResponseEntity<AuthDtoWrapper> getAuthDto() {
+        // TODO Перенести в модуль работы с Kit-Box или создать отдельный контроллер для запросов
         return ResponseEntity.ok(authService.getAuthDto());
     }
 

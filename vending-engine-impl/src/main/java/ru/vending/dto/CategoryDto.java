@@ -6,6 +6,7 @@ import java.util.List;
 
 @Data
 public class CategoryDto {
+    // TODO выпилить
 
     private Long id;
     private String name;

@@ -13,6 +13,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Product {
+    // TODO Удалить или превратить в класс для маппинга
 
     @Id
     @Column (name = "product_id")

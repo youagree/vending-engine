@@ -8,5 +8,6 @@ import ru.vending.entity.Product;
 public interface ProductMapper {
 
     ProductDto mapToDto(Product product);
+    // TODO подготовить класс под форму продукта из сервиса
 
 }

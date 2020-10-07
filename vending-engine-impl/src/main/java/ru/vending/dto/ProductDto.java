@@ -4,6 +4,7 @@ import lombok.Data;
 
 @Data
 public class ProductDto {
+    // TODO выпилить
 
     private Long id;
     private String name;

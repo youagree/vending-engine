@@ -28,6 +28,7 @@ public class CategoriesService {
     }
 
     public List<CategoryDto> getCategories() {
+        // TODO продумать логику выделения категорий из матрицы продуктов (Map<String,List>?)
         List<Category> categories = categoriesRepository.findAll();
         log.info("Founded categories: {}", categories);
         return categories.stream().
@@ -36,6 +37,7 @@ public class CategoriesService {
     }
 
     public CategoryDto getCategoryById(Long id) {
+        // TODO вытаскивать категорию из всех категорий...
         Category category = categoriesRepository.findById(id).orElseThrow(EntityNotFoundException::new);
         log.info("Founded category: {}", category.getName());
         return categoryMapper.map(category);

@@ -14,6 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Category {
+    // TODO Удалить или превратить в класс для маппинга
 
     @Id
     @Column(name = "category_id")
