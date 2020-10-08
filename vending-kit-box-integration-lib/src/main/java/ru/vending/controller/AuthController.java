@@ -29,6 +29,8 @@ public class AuthController {
         this.authService = authService;
     }
 
+    // TODO Настроить работу запросов через RestTemplate, попробовать поработать с списком продуктов или матрицей товаров.
+
 //    public AuthDtoWrapper getAuthDto() {
 //        String url = "http://localhost:8080/ui/vending/categories/test";
 //
