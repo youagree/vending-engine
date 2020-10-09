@@ -4,9 +4,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
-import ru.vending.component.Auth;
-import ru.vending.component.AuthWrapper;
+import ru.vending.dto.AuthDto;
 import ru.vending.dto.AuthDtoWrapper;
+import ru.vending.dto.AuthDtoWrapperWithId;
 import ru.vending.mapper.AuthWrapperMapper;
 
 import java.util.Date;
@@ -27,19 +27,29 @@ public class AuthService {
 
     private Long generateUniqueRequestId () {
         Date date = new Date();
-
         return date.getTime();
     }
 
     public AuthDtoWrapper getAuthDto() {
-        AuthWrapper wrap = new AuthWrapper();
-        Auth auth = new Auth();
-        auth.setUserLogin(USER_LOGIN);
-        auth.setCompanyId(COMPANY_ID);
-        auth.setRequestId(generateUniqueRequestId());
-        String sign = COMPANY_ID + PASSWORD + auth.getRequestId();
-        auth.setSign(DigestUtils.md5DigestAsHex(sign.getBytes()));
-        wrap.setAuth(auth);
-        return authWrapperMapper.mapToDto(wrap);
+        Long aLong = generateUniqueRequestId();
+        String sign = COMPANY_ID + PASSWORD + aLong;
+        return new AuthDtoWrapper()
+                                    .setAuth(new AuthDto()
+                                            .setCompanyId(COMPANY_ID)
+                                            .setRequestId(aLong)
+                                            .setSign(DigestUtils.md5DigestAsHex(sign.getBytes()))
+                                            .setUserLogin(USER_LOGIN));
+    }
+
+    public AuthDtoWrapperWithId getAuthDtoWithId(Long id) {
+        Long aLong = generateUniqueRequestId();
+        String sign = COMPANY_ID + PASSWORD + aLong;
+        return new AuthDtoWrapperWithId()
+                .setAuth(new AuthDto()
+                        .setCompanyId(COMPANY_ID)
+                        .setRequestId(aLong)
+                        .setSign(DigestUtils.md5DigestAsHex(sign.getBytes()))
+                        .setUserLogin(USER_LOGIN))
+                .setId(id);
     }
 }

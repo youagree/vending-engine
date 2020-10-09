@@ -35,9 +35,11 @@ public class CategoriesController {
     }
 
     @Autowired
-    public CategoriesController(CategoriesService categoriesService, AuthService authService) {
+    public CategoriesController(CategoriesService categoriesService, AuthService authService, ObjectMapper objectMapper, RestTemplateUtil restTemplateUtil) {
         this.categoriesService = categoriesService;
         this.authService = authService;
+        this.objectMapper = objectMapper;
+        this.restTemplateUtil = restTemplateUtil;
     }
 
     @GetMapping
