@@ -28,15 +28,12 @@ public class Product {
     private Integer choiceNumber;
 
     @Column
-    private String name;
-
-    @Column
     private String description;
 
     @Column
     private Integer price;
 
-    @Column
+    @Column (columnDefinition = "TEXT")
     private String image;
 
     @Column
