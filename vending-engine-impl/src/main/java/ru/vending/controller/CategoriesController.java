@@ -1,7 +1,6 @@
 package ru.vending.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,10 +8,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
-import ru.vending.dto.AuthDtoWrapper;
+import ru.vending.api.ComportInterfaceIntegration;
 import ru.vending.dto.CategoryDto;
-import ru.vending.dto.response.GetGoodsMatricesDto;
-import ru.vending.dto.response.GetModemsDto;
 import ru.vending.service.AuthService;
 import ru.vending.service.CategoriesService;
 import ru.vending.util.RestTemplateUtil;
@@ -28,6 +25,7 @@ public class CategoriesController {
     private RestTemplate restTemplate;
     private ObjectMapper objectMapper;
     private RestTemplateUtil restTemplateUtil;
+    private ComportInterfaceIntegration comportInterfaceIntegration;
 
     @Autowired
     public void setRestTemplate(RestTemplate restTemplate) {
@@ -35,11 +33,15 @@ public class CategoriesController {
     }
 
     @Autowired
-    public CategoriesController(CategoriesService categoriesService, AuthService authService, ObjectMapper objectMapper, RestTemplateUtil restTemplateUtil) {
+    public CategoriesController(CategoriesService categoriesService, AuthService authService,
+                                ObjectMapper objectMapper, RestTemplateUtil restTemplateUtil,
+                                ComportInterfaceIntegration comportInterfaceIntegration) {
+
         this.categoriesService = categoriesService;
         this.authService = authService;
         this.objectMapper = objectMapper;
         this.restTemplateUtil = restTemplateUtil;
+        this.comportInterfaceIntegration = comportInterfaceIntegration;
     }
 
     @GetMapping
@@ -54,11 +56,14 @@ public class CategoriesController {
         return ResponseEntity.ok(categoriesService.getCategoryById(id));
     }
 
+    /* Всё, что связанно с Kit-Box, пока что просто закомментирую
+
+
     @GetMapping("/test")
     public ResponseEntity<AuthDtoWrapper> getAuthDto() {
-        // TODO Перенести в модуль работы с Kit-Box или создать отдельный контроллер для запросов
         return ResponseEntity.ok(authService.getAuthDto());
     }
+
 
     @GetMapping("/1")
     @SneakyThrows
@@ -89,4 +94,11 @@ public class CategoriesController {
         System.out.println(exchange.getBody());
         System.out.println(exchange.getStatusCode().toString());
     }
+
+    @GetMapping("/123")
+    public void startWaiting() {
+        System.out.println(comportInterfaceIntegration.kitBoxWaiting());
+    }
+
+     */
 }

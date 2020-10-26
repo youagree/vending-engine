@@ -13,7 +13,6 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Product {
-    // TODO Удалить или превратить в класс для маппинга
 
     @Id
     @Column (name = "product_id")
@@ -26,18 +25,21 @@ public class Product {
     private Category category_id;
 
     @Column
+    private Integer choiceNumber;
+
+    @Column
     private String name;
 
     @Column
     private String description;
 
     @Column
-    private int price;
+    private Integer price;
 
     @Column
     private String image;
 
     @Column
-    private int count;
+    private Integer count;
 
 }

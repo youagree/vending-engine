@@ -6,8 +6,8 @@ import java.util.List;
 
 @Data
 public class CategoryDto {
-    // TODO выпилить
 
+    private Long matrixId; //Нужно ли это? Думаю нет
     private Long id;
     private String name;
     private String image;

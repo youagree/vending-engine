@@ -5,7 +5,7 @@ public interface ComportInterfaceIntegration {
 
     /** Метод для записи данных в компорт двигателей.
      * @param spiralNumber - номер ряда и спирали одним числом, например 26: 2 - номер ряда,
-     * 6 - номер спирали в этом ряду
+     *                                                                       6 - номер спирали в этом ряду
      */
     void spiralMotorInput(Integer spiralNumber);
 
