@@ -14,7 +14,6 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Category {
-    // TODO Удалить или превратить в класс для маппинга
 
     @Id
     @Column(name = "category_id")
@@ -24,7 +23,7 @@ public class Category {
     @Column
     private String name;
 
-    @Column
+    @Column (columnDefinition = "TEXT")
     private String image;
 
     @OneToMany(mappedBy = "category_id")

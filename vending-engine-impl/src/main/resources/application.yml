@@ -9,12 +9,11 @@ spring:
   profiles:
     active: default
 
-  #удалить все что связано с хибером и сущности тоже
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQL94Dialect
     show-sql: true
     hibernate:
-      ddl-auto: create
+      ddl-auto: create-drop
     properties:
       hibernate:
         show-sql: true
