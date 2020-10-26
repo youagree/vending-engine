@@ -11,7 +11,6 @@ import java.util.Arrays;
  * ждать ответа о завершении.
  * Настройки порта: 9600.8.1.NONE
  */
-
 @Component
 public class SpiralMotorComport {
     private static final SerialPort raspberryComport = new SerialPort("COM5"); // TODO узнать адрес этого порта на расбери

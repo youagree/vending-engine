@@ -18,6 +18,11 @@
             <artifactId>vending-kit-box-integration-lib</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>ru.vending</groupId>
+            <artifactId>vending-comport-integration-lib</artifactId>
+        </dependency>
+
         <!-- base starters -->
         <dependency>
             <groupId>org.springframework.boot</groupId>

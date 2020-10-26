@@ -8,5 +8,5 @@ import ru.vending.entity.Category;
 public interface CategoryMapper {
 
     CategoryDto map(Category category);
-    // TODO подготовить класс под форму продукта из сервиса
+
 }

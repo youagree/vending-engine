@@ -48,6 +48,12 @@
                 <artifactId>vending-kit-box-integration-lib</artifactId>
                 <version>${vending-kit-box-integration-lib.version}</version>
             </dependency>
+
+            <dependency>
+                <groupId>ru.vending</groupId>
+                <artifactId>vending-comport-integration-lib</artifactId>
+                <version>${vending-comport-integration-lib.version}</version>
+            </dependency>
             <!-- libs -->
             <dependency>
                 <groupId>org.scream3r</groupId>

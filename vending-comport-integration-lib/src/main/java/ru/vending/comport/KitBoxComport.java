@@ -9,7 +9,6 @@ import org.springframework.stereotype.Component;
  * Класс реализующий возможность отправить данные на компорт KitBox (String) и вычитывать ответ (String).
  * Настройки порта: 9600.8.1.NONE
  */
-
 @Component
 public class KitBoxComport {
     private static final SerialPort kitBoxComport = new SerialPort("COM7");

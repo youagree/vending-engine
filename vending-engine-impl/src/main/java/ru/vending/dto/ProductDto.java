@@ -4,13 +4,13 @@ import lombok.Data;
 
 @Data
 public class ProductDto {
-    // TODO выпилить
 
     private Long id;
+    private Long category_Id;
     private String name;
     private String description;
-    private int price;
+    private Integer price;
     private String image;
-    private int count;
+    private Integer count;
 
 }
