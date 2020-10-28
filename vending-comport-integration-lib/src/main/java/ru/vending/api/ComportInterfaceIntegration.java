@@ -7,13 +7,13 @@ public interface ComportInterfaceIntegration {
      * @param spiralNumber - номер ряда и спирали одним числом, например 26: 2 - номер ряда,
      *                                                                       6 - номер спирали в этом ряду
      */
-    void spiralMotorInput(Integer spiralNumber);
+    void spiralMotorInput(String spiralNumber);
 
     /** Метод для ожидания ответа после завершения работы двигателей.
      * @return Integer - (1 - работа завершена успешно, товар получен покупателем,
      *                    0 - работа двигателей была завершена некорректно)
      */
-    Integer spiralMotorWaiting();
+    String spiralMotorWaiting();
 
     /** Метод для записи данных в компорт Kit Box.
      * @param data - сумма, которую должен заплатить покупатель и способ оплаты

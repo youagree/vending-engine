@@ -16,16 +16,16 @@ public class SpiralMotorComport {
     private static final SerialPort raspberryComport = new SerialPort("COM5"); // TODO узнать адрес этого порта на расбери
 
     @SneakyThrows(value = {SerialPortException.class, InterruptedException.class})
-    public void sendSpiralNumberOnComport(int spiralNumber) {
+    public void sendSpiralNumberOnComport(String spiralNumber) {
         raspberryComport.openPort();
         raspberryComport.setParams(SerialPort.BAUDRATE_9600, SerialPort.DATABITS_8, SerialPort.STOPBITS_1, SerialPort.PARITY_NONE);
-        raspberryComport.writeInt(spiralNumber);
+        raspberryComport.writeBytes(spiralNumber.getBytes());
         Thread.sleep(100);
         raspberryComport.closePort();
     }
 
     @SneakyThrows(value = {SerialPortException.class, InterruptedException.class})
-    public Integer spiralMotorsResponseWaiting() {
+    public String spiralMotorsResponseWaiting() {
         byte[] bytesOnPort = null;
         raspberryComport.openPort();
         raspberryComport.setParams(SerialPort.BAUDRATE_9600, SerialPort.DATABITS_8, SerialPort.STOPBITS_1, SerialPort.PARITY_NONE);
@@ -36,7 +36,7 @@ public class SpiralMotorComport {
             Thread.sleep(200);
         }
         raspberryComport.closePort();
-        return new Integer(Arrays.toString(bytesOnPort));
+        return new String(bytesOnPort);
     }
 
 }
