@@ -18,12 +18,12 @@ public class ComportService implements ComportInterfaceIntegration {
     }
 
     @Override
-    public void spiralMotorInput(Integer spiralNumber) {
+    public void spiralMotorInput(String spiralNumber) {
         spiralMotorComport.sendSpiralNumberOnComport(spiralNumber);
     }
 
     @Override
-    public Integer spiralMotorWaiting() {
+    public String spiralMotorWaiting() {
         return spiralMotorComport.spiralMotorsResponseWaiting();
     }
 

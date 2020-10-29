@@ -26,7 +26,7 @@ public class Category {
     @Column (columnDefinition = "TEXT")
     private String image;
 
-    @OneToMany(mappedBy = "category_id")
+    @OneToMany(mappedBy = "category_id", fetch = FetchType.EAGER)
     @ToString.Exclude
     private List<Product> products;
 
