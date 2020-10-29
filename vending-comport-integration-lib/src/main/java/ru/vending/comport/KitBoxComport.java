@@ -39,5 +39,18 @@ public class KitBoxComport {
         return new String(bytesOnPort);
     }
 
-
+    @SneakyThrows(value = {SerialPortException.class, InterruptedException.class})
+    public void paymentCancel() {
+        if (kitBoxComport.isOpened()) {
+            String cancel = "Payment cancel";
+            kitBoxComport.writeBytes(cancel.getBytes());
+        } else {
+            kitBoxComport.openPort();
+            String cancel = "Payment cancel";
+            kitBoxComport.writeBytes(cancel.getBytes());
+        }
+        Thread.sleep(300);
+        kitBoxComport.purgePort(SerialPort.PURGE_RXCLEAR | SerialPort.PURGE_TXCLEAR);
+        kitBoxComport.closePort();
+    }
 }

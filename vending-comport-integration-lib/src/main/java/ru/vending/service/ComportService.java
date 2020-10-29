@@ -36,4 +36,9 @@ public class ComportService implements ComportInterfaceIntegration {
     public String kitBoxWaiting() {
         return kitBoxComport.kitBoxResponseWaiting();
     }
+
+    @Override
+    public void paymentCancel() {
+        kitBoxComport.paymentCancel();
+    }
 }
