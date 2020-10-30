@@ -39,6 +39,10 @@ public class PaymentService {
         return String.valueOf(currentMoneyCount);
     }
 
+    public void paymentCancel () {
+        comportInterfaceIntegration.paymentCancel();
+    }
+
     public String getStatusOfCurrentOperation() {
         return status;
     }

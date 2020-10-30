@@ -21,9 +21,9 @@ public class MotorController {
         this.productService = productService;
     }
 
-    @GetMapping ("/{id}")
-    public String lestFuckingBuyThisShit (@PathVariable Long id) {
+    @GetMapping("/{id}")
+    public String initMotorsForProductById(@PathVariable Long id) {
         motorsService.activateMotorsByChoiceNumber(productService.getProductById(id).getChoiceNumber(), id);
-        return "Заебись";
+        return "Покупка завершена!";
     }
 }

@@ -1,11 +1,7 @@
 package ru.vending.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.vending.dto.ProductDto;
-import ru.vending.entity.Product;
-import ru.vending.repository.ProductRepository;
 import ru.vending.service.PaymentService;
 import ru.vending.service.ProductService;
 
@@ -24,6 +20,7 @@ public class PaymentController {
 
     @GetMapping("/{id}")
     public void sendIdAndPaymentTypeOnPaymentModule (@PathVariable Long id, @RequestParam String paymentType) {
+        paymentService.reset();
         productService.sendIdAndPaymentType(id, paymentType);
     }
 
@@ -33,7 +30,12 @@ public class PaymentController {
     }
 
     @GetMapping("/{id}/status")
-    public String getTransactionStatus () {
+    public String getTransactionStatus(@PathVariable Long id) {
         return paymentService.getStatusOfCurrentOperation();
+    }
+
+    @GetMapping("/paymentCancel")
+    public void paymentCancel() {
+        paymentService.paymentCancel();
     }
 }
