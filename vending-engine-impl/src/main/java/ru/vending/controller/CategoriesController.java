@@ -19,6 +19,7 @@ public class CategoriesController {
 
     private final CategoriesService categoriesService;
 
+
     @Autowired
     public CategoriesController(CategoriesService categoriesService) {
         this.categoriesService = categoriesService;

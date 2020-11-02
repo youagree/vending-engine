@@ -35,6 +35,7 @@ public class ProductService {
     public ProductDto getProductById(Long id) {
         Product product = productRepository.findById(id).orElseThrow(EntityNotFoundException::new);
         //TODO sl4j logs
+        log.info("Founded product: {}", product);
         return productMapper.mapToDto(product);
     }
 
@@ -42,6 +43,7 @@ public class ProductService {
     public List<ProductDto> getAllProducts () {
         List <Product> productsList = productRepository.findAll();
         //TODO sl4j logs
+        log.info("Founded products: {}", productsList);
         return  productsList.stream()
                 .filter(p -> p.getCount() != 0)
                 .map(p -> productMapper.mapToDto(p))
@@ -57,6 +59,7 @@ public class ProductService {
         } else {
             String prodPrice = String.valueOf(product.getPrice());
             comportInterfaceIntegration.kitBoxInput(prodPrice + " " + paymentType);
+            log.info("Price and payment type sended in comport: price {}, payment type {}", prodPrice, paymentType);
         }
     }
 }

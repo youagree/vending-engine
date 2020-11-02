@@ -26,15 +26,20 @@ public class MotorsService {
     @Transactional
     public String activateMotorsByChoiceNumber(Integer choiceNumber, Long id) {
         comportInterfaceIntegration.spiralMotorInput(String.valueOf(choiceNumber));
+        log.info("Send choice number of product in motors comport! Choice number: {}", choiceNumber);
         if (comportInterfaceIntegration.spiralMotorWaiting().equals("1")) {
+            log.info("The response is received: \"1\". Product issued to the customer.");
             Product product = productRepository.findById(id).orElseThrow(EntityNotFoundException::new);
             if (product.getCount() >= 1) {
                 product.setCount(product.getCount() - 1);
                 productRepository.save(product);
+                log.info("Count of current product has been reduced");
             }
 
+            log.info("Purchase complete!");
             return "Покупка выполнена!";
         } else {
+            //todo error log
             log.info("Error! Try again please!");
             return "Произошла ошибка!";
         }
