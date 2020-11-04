@@ -1,10 +1,12 @@
 package ru.vending.service;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.vending.api.ComportInterfaceIntegration;
 
+@Slf4j
 @Service
 public class PaymentService {
 
@@ -18,32 +20,25 @@ public class PaymentService {
     }
 
     @Transactional
-    public String paymentComportMoneyListenerWithCashPayment() {
-        try {
-            status = comportInterfaceIntegration.kitBoxWaiting();
-            currentMoneyCount += Integer.parseInt(status);
-        } catch (NumberFormatException e) {
-            return String.valueOf(currentMoneyCount);
-        }
-
-        return String.valueOf(currentMoneyCount);
-    }
-
-    @Transactional
     public String paymentComportMoneyListenerWithCashlessPayment(Integer price) {
+        log.info("Product price: {}", price);
         if (currentMoneyCount < price) {
             status = comportInterfaceIntegration.kitBoxWaiting();
             currentMoneyCount += Integer.parseInt(status);
+            log.info("Current money count has been incremented on {}", status);
         } else {
             status = comportInterfaceIntegration.kitBoxWaiting();
+            log.info("Return status: {}", status);
             return status;
         }
 
+        log.info("Return current money count: {}", currentMoneyCount);
         return String.valueOf(currentMoneyCount);
     }
 
     public void paymentCancel () {
         comportInterfaceIntegration.paymentCancel();
+        log.info("Payment cancel completed!");
     }
 
     public String getStatusOfCurrentOperation() {
@@ -53,5 +48,6 @@ public class PaymentService {
     public void reset() {
         currentMoneyCount = 0;
         status = null;
+        log.info("Counter and status reset!");
     }
 }
