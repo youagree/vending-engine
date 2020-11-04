@@ -54,18 +54,18 @@ public class KitBoxComport {
 
     @SneakyThrows(value = {SerialPortException.class, InterruptedException.class})
     public void paymentCancel(String currentMoney) {
+        log.info("Current canceled price: {}", currentMoney);
         if (kitBoxComport.isOpened()) {
             log.info("Payment cancel start!");
-            String cancel = "Payment cancel";
+            String cancel = "payment cancel " + currentMoney;
             kitBoxComport.writeBytes(cancel.getBytes());
-            kitBoxComport.writeBytes(currentMoney.getBytes());
             log.info("Written bytes on comport: {}", cancel.getBytes());
         } else {
             kitBoxComport.openPort();
             log.info("KitBox comport is opened");
             kitBoxComport.setParams(SerialPort.BAUDRATE_9600, SerialPort.DATABITS_8, SerialPort.STOPBITS_1, SerialPort.PARITY_NONE);
             log.info("KitBox comport settings: 9600.8.1.NONE");
-            String cancel = "Payment cancel";
+            String cancel = "payment cancel " + currentMoney;
             kitBoxComport.writeBytes(cancel.getBytes());
             log.info("Written bytes on comport: {}", cancel.getBytes());
         }

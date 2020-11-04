@@ -32,7 +32,7 @@ public class PaymentService {
         } else {
             status = comportInterfaceIntegration.kitBoxWaiting();
             log.info("Return status: {}", status);
-            return new PayStatusResponse().setPaymentStatus(status).setCurrentMoney(valueOf(price));
+            return new PayStatusResponse().setPaymentStatus(status).setCurrentMoney(String.valueOf(currentMoneyCount));
         }
 
         log.info("Return current money count: {}", currentMoneyCount);

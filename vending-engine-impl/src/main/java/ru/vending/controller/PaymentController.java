@@ -42,8 +42,8 @@ public class PaymentController {
 
     @GetMapping("/paymentCancel")
     @ResponseStatus(HttpStatus.OK)
-    public PaymentCancelStatus paymentCancel(String currentMoneyCount) {
+    public PaymentCancelStatus paymentCancel(@RequestParam String currentMoneyCount) {
         paymentService.paymentCancel(currentMoneyCount);
-        return new PaymentCancelStatus().setPaymentCancelStatus("Payment canceled");
+        return new PaymentCancelStatus().setPaymentCancelStatus("payment canceled");
     }
 }

@@ -35,7 +35,6 @@ public class MotorsService {
                 productRepository.save(product);
                 log.info("Count of current product has been reduced");
             }
-
             log.info("Purchase complete!");
             return "Покупка выполнена!";
         } else {

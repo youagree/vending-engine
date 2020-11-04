@@ -39,3 +39,7 @@ spring:
       serialization:
         FAIL_ON_EMPTY_BEANS: false #отсутствие свойств не приводит к ошибке
       default-property-inclusion: NON_NULL #не сериализовывать null поля
+
+logging:
+  level:
+    jssc: TRACE
