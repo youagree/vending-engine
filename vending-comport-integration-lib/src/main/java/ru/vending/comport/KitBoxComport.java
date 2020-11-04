@@ -19,6 +19,7 @@ public class KitBoxComport {
 
     @SneakyThrows(value = {SerialPortException.class, InterruptedException.class})
     public void sendDataOnKitBoxComport(String data) {
+        log.info("Current data: {}", data);
         kitBoxComport.openPort();
         log.info("KitBox comport is opened");
         kitBoxComport.setParams(SerialPort.BAUDRATE_9600, SerialPort.DATABITS_8, SerialPort.STOPBITS_1, SerialPort.PARITY_NONE);

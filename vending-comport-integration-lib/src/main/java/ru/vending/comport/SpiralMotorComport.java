@@ -19,6 +19,7 @@ public class SpiralMotorComport {
 
     @SneakyThrows(value = {SerialPortException.class, InterruptedException.class})
     public void sendSpiralNumberOnComport(String spiralNumber) {
+        log.info("Current spiral number: {}", spiralNumber);
         raspberryComport.openPort();
         log.info("Raspberry comport is opened");
         raspberryComport.setParams(SerialPort.BAUDRATE_9600, SerialPort.DATABITS_8, SerialPort.STOPBITS_1, SerialPort.PARITY_NONE);

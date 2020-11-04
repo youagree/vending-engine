@@ -33,6 +33,7 @@ public class ProductService {
 
     @Transactional(readOnly = true)
     public ProductDto getProductById(Long id) {
+        log.info("Try found product by id, this ID - {}", id);
         Product product = productRepository.findById(id).orElseThrow(EntityNotFoundException::new);
         //TODO sl4j logs
         log.info("Founded product: {}", product);

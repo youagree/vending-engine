@@ -21,6 +21,7 @@ public class PaymentService {
 
     @Transactional
     public String paymentComportMoneyListenerWithCashlessPayment(Integer price) {
+        log.info("Product price: {}", price);
         if (currentMoneyCount < price) {
             status = comportInterfaceIntegration.kitBoxWaiting();
             currentMoneyCount += Integer.parseInt(status);

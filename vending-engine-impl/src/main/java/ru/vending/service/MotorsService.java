@@ -26,7 +26,7 @@ public class MotorsService {
     @Transactional
     public String activateMotorsByChoiceNumber(Integer choiceNumber, Long id) {
         comportInterfaceIntegration.spiralMotorInput(String.valueOf(choiceNumber));
-        log.info("Send choice number of product in motors comport! Choice number: {}", choiceNumber);
+        log.info("Send choice number of product in motors comport! Choice number: {}, ID: {}", choiceNumber, id);
         if (comportInterfaceIntegration.spiralMotorWaiting().equals("1")) {
             log.info("The response is received: \"1\". Product issued to the customer.");
             Product product = productRepository.findById(id).orElseThrow(EntityNotFoundException::new);
