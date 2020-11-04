@@ -40,7 +40,7 @@ public class PaymentController {
         return paymentService.getStatusOfCurrentOperation();
     }
 
-    @GetMapping("/paymentCancel")
+    @PostMapping("/paymentCancel")
     @ResponseStatus(HttpStatus.OK)
     public PaymentCancelStatus paymentCancel(@RequestParam String currentMoneyCount) {
         paymentService.paymentCancel(currentMoneyCount);
