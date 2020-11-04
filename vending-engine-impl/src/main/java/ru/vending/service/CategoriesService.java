@@ -3,6 +3,7 @@ package ru.vending.service;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.vending.dto.CategoryDto;
 import ru.vending.entity.Category;
 import ru.vending.mapper.CategoryMapper;
@@ -25,6 +26,7 @@ public class CategoriesService {
         this.categoryMapper = categoryMapper;
     }
 
+    @Transactional(readOnly = true)
     public List<CategoryDto> getCategories() {
         List<Category> categories = categoriesRepository.findAll();
         log.info("Founded categories: {}", categories);
@@ -33,6 +35,7 @@ public class CategoriesService {
                 collect(Collectors.toList());
     }
 
+    @Transactional(readOnly = true)
     public CategoryDto getCategoryById(Long id) {
         Category category = categoriesRepository.findById(id).orElseThrow(EntityNotFoundException::new);
         log.info("Founded category: {}", category.getName());

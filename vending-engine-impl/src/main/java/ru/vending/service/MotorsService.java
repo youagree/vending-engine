@@ -3,6 +3,7 @@ package ru.vending.service;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.vending.api.ComportInterfaceIntegration;
 import ru.vending.entity.Product;
 import ru.vending.repository.ProductRepository;
@@ -22,6 +23,7 @@ public class MotorsService {
         this.productRepository = productRepository;
     }
 
+    @Transactional
     public String activateMotorsByChoiceNumber(Integer choiceNumber, Long id) {
         comportInterfaceIntegration.spiralMotorInput(String.valueOf(choiceNumber));
         if (comportInterfaceIntegration.spiralMotorWaiting().equals("1")) {

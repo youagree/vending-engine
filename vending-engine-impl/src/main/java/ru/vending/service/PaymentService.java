@@ -2,6 +2,7 @@ package ru.vending.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.vending.api.ComportInterfaceIntegration;
 
 @Service
@@ -16,6 +17,7 @@ public class PaymentService {
         this.comportInterfaceIntegration = comportInterfaceIntegration;
     }
 
+    @Transactional
     public String paymentComportMoneyListenerWithCashPayment() {
         try {
             status = comportInterfaceIntegration.kitBoxWaiting();
@@ -27,6 +29,7 @@ public class PaymentService {
         return String.valueOf(currentMoneyCount);
     }
 
+    @Transactional
     public String paymentComportMoneyListenerWithCashlessPayment(Integer price) {
         if (currentMoneyCount < price) {
             status = comportInterfaceIntegration.kitBoxWaiting();
