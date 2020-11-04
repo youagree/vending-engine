@@ -5,6 +5,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.vending.api.ComportInterfaceIntegration;
+import ru.vending.dto.PayStatusResponse;
+
+import static java.lang.String.valueOf;
 
 @Slf4j
 @Service
@@ -20,7 +23,7 @@ public class PaymentService {
     }
 
     @Transactional
-    public String paymentComportMoneyListenerWithCashlessPayment(Integer price) {
+    public PayStatusResponse paymentComportMoneyListenerWithCashlessPayment(Integer price) {
         log.info("Product price: {}", price);
         if (currentMoneyCount < price) {
             status = comportInterfaceIntegration.kitBoxWaiting();
@@ -29,20 +32,21 @@ public class PaymentService {
         } else {
             status = comportInterfaceIntegration.kitBoxWaiting();
             log.info("Return status: {}", status);
-            return status;
+            return new PayStatusResponse().setPaymentStatus(status).setCurrentMoney(valueOf(price));
         }
 
         log.info("Return current money count: {}", currentMoneyCount);
-        return String.valueOf(currentMoneyCount);
+        return new PayStatusResponse().setCurrentMoney(valueOf(currentMoneyCount))
+                                      .setPaymentStatus(null);
     }
 
-    public void paymentCancel () {
-        comportInterfaceIntegration.paymentCancel();
+    public void paymentCancel (String currentMoney) {
+        comportInterfaceIntegration.paymentCancel(currentMoney);
         log.info("Payment cancel completed!");
     }
 
-    public String getStatusOfCurrentOperation() {
-        return status;
+    public PayStatusResponse getStatusOfCurrentOperation() {
+        return new PayStatusResponse().setPaymentStatus(status).setCurrentMoney(null);
     }
 
     public void reset() {

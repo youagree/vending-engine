@@ -31,6 +31,6 @@ public interface ComportInterfaceIntegration {
     /** Метод для отмены оплаты, отправляет String "Payment cancel" в порт оплаты,
      * закрывает и чистит порт взаимодействия с портом оплаты
      */
-    void paymentCancel();
+    void paymentCancel(String currentMoney);
 
 }

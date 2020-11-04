@@ -2,11 +2,8 @@ package ru.vending.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import ru.vending.dto.MotorStatusResponse;
 import ru.vending.service.MotorsService;
 import ru.vending.service.ProductService;
 
@@ -23,10 +20,10 @@ public class MotorController {
         this.productService = productService;
     }
 
-    @GetMapping("/{id}")
+    @PostMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public String initMotorsForProductById(@PathVariable Long id) {
+    public MotorStatusResponse initMotorsForProductById(@PathVariable Long id) {
         motorsService.activateMotorsByChoiceNumber(productService.getProductById(id).getChoiceNumber(), id);
-        return "Покупка завершена!";
+        return new MotorStatusResponse().setMotorStatus("s");
     }
 }

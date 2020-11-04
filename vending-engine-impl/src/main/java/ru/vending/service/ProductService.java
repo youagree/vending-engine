@@ -1,5 +1,6 @@
 package ru.vending.service;
 
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,7 +36,6 @@ public class ProductService {
     public ProductDto getProductById(Long id) {
         log.info("Try found product by id, this ID - {}", id);
         Product product = productRepository.findById(id).orElseThrow(EntityNotFoundException::new);
-        //TODO sl4j logs
         log.info("Founded product: {}", product);
         return productMapper.mapToDto(product);
     }
@@ -43,7 +43,6 @@ public class ProductService {
     @Transactional(readOnly = true)
     public List<ProductDto> getAllProducts () {
         List <Product> productsList = productRepository.findAll();
-        //TODO sl4j logs
         log.info("Founded products: {}", productsList);
         return  productsList.stream()
                 .filter(p -> p.getCount() != 0)
@@ -51,12 +50,13 @@ public class ProductService {
                 .collect(Collectors.toList());
     }
 
+    @SneakyThrows
     @Transactional(readOnly = true)
     public void sendIdAndPaymentType (Long id, String paymentType) {
         Product product = productRepository.findById(id).orElseThrow(EntityNotFoundException::new);
         if (product.getCount() == 0) {
-            //todo exception
             log.info("Sorry! This product is out of stock");
+            throw new Exception("Count is 0");
         } else {
             String prodPrice = String.valueOf(product.getPrice());
             comportInterfaceIntegration.kitBoxInput(prodPrice + " " + paymentType);
