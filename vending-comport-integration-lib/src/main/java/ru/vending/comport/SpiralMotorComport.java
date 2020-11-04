@@ -15,7 +15,8 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @Component
 public class SpiralMotorComport {
-    private static final SerialPort raspberryComport = new SerialPort("COM5"); // TODO узнать адрес этого порта на расбери
+    private static final SerialPort raspberryComport = new SerialPort("COM5");
+    // TODO узнать адрес этого порта на расбери
 
     @SneakyThrows(value = {SerialPortException.class, InterruptedException.class})
     public void sendSpiralNumberOnComport(String spiralNumber) {

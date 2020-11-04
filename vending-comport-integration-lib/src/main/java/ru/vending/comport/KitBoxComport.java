@@ -53,11 +53,12 @@ public class KitBoxComport {
     }
 
     @SneakyThrows(value = {SerialPortException.class, InterruptedException.class})
-    public void paymentCancel() {
+    public void paymentCancel(String currentMoney) {
         if (kitBoxComport.isOpened()) {
             log.info("Payment cancel start!");
             String cancel = "Payment cancel";
             kitBoxComport.writeBytes(cancel.getBytes());
+            kitBoxComport.writeBytes(currentMoney.getBytes());
             log.info("Written bytes on comport: {}", cancel.getBytes());
         } else {
             kitBoxComport.openPort();

@@ -38,7 +38,7 @@ public class ComportService implements ComportInterfaceIntegration {
     }
 
     @Override
-    public void paymentCancel() {
-        kitBoxComport.paymentCancel();
+    public void paymentCancel(String currentMoney) {
+        kitBoxComport.paymentCancel(currentMoney);
     }
 }
