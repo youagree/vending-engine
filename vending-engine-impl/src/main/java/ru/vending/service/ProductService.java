@@ -3,11 +3,13 @@ package ru.vending.service;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.vending.api.ComportInterfaceIntegration;
 import ru.vending.dto.ProductDto;
 import ru.vending.entity.Product;
 import ru.vending.mapper.ProductMapper;
 import ru.vending.repository.ProductRepository;
+
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -29,12 +31,14 @@ public class ProductService {
         this.comportInterfaceIntegration = comportInterfaceIntegration;
     }
 
+    @Transactional(readOnly = true)
     public ProductDto getProductById(Long id) {
         Product product = productRepository.findById(id).orElseThrow(EntityNotFoundException::new);
         //TODO sl4j logs
         return productMapper.mapToDto(product);
     }
 
+    @Transactional(readOnly = true)
     public List<ProductDto> getAllProducts () {
         List <Product> productsList = productRepository.findAll();
         //TODO sl4j logs
@@ -44,6 +48,7 @@ public class ProductService {
                 .collect(Collectors.toList());
     }
 
+    @Transactional(readOnly = true)
     public void sendIdAndPaymentType (Long id, String paymentType) {
         Product product = productRepository.findById(id).orElseThrow(EntityNotFoundException::new);
         if (product.getCount() == 0) {
@@ -54,25 +59,4 @@ public class ProductService {
             comportInterfaceIntegration.kitBoxInput(prodPrice + " " + paymentType);
         }
     }
-
-            //----------------------
-//            String payResponse = comportInterfaceIntegration.kitBoxWaiting();
-//            if (payResponse.equals("s")) {
-//                comportInterfaceIntegration.spiralMotorInput(String.valueOf(product.getChoiceNumber()));
-//                String spiralMotorResponse = comportInterfaceIntegration.spiralMotorWaiting();
-//                if (spiralMotorResponse == 1) {
-//                    //todo exception
-//                    if (product.getCount() >= 1) {
-//                        product.setCount(product.getCount() - 1);
-//                        productRepository.save(product);
-//                        return;
-//                    }
-//                } else {
-//                    log.info("Error! Try again please!");
-//                }
-//            } else {
-//                log.info("Error! The payment procedure is not completed");
-//            }
-//        }
-//    }
 }
