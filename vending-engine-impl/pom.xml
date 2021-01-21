@@ -27,6 +27,12 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
+        <!-- lib -->
+        <dependency>
+            <groupId>ru.cash</groupId>
+            <artifactId>mdb-cash-control</artifactId>
+        </dependency>
+
         <!-- test -->
         <dependency>
             <groupId>org.springframework.boot</groupId>

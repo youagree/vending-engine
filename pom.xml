@@ -23,6 +23,7 @@
         <springfox-swagger2>2.9.2</springfox-swagger2>
         <vending-comport-integration-lib.version>1.0-SNAPSHOT</vending-comport-integration-lib.version>
         <jssc.version>2.8.0</jssc.version>
+        <mdb-cash-control.version>0.0.1-SNAPSHOT</mdb-cash-control.version>
 
     </properties>
 
@@ -53,6 +54,13 @@
                 <groupId>org.scream3r</groupId>
                 <artifactId>jssc</artifactId>
                 <version>${jssc.version}</version>
+            </dependency>
+
+            <!-- cash control lib -->
+            <dependency>
+                <groupId>ru.cash</groupId>
+                <artifactId>mdb-cash-control</artifactId>
+                <version>${mdb-cash-control.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

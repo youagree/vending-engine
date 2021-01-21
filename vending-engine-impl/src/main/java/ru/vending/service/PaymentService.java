@@ -1,25 +1,30 @@
 package ru.vending.service;
 
+import static java.lang.String.valueOf;
+
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ru.cash.control.client.CashControlClientInterface;
 import ru.vending.api.ComportInterfaceIntegration;
+import ru.vending.dto.CanDispenseDto;
 import ru.vending.dto.PayStatusResponse;
-
-import static java.lang.String.valueOf;
 
 @Slf4j
 @Service
 public class PaymentService {
 
     private ComportInterfaceIntegration comportInterfaceIntegration;
+    private CashControlClientInterface cashControlClientInterface;
     private int currentMoneyCount;
     private String status;
 
     @Autowired
-    public PaymentService(ComportInterfaceIntegration comportInterfaceIntegration) {
+    public PaymentService(ComportInterfaceIntegration comportInterfaceIntegration,
+                          CashControlClientInterface cashControlClientInterface) {
         this.comportInterfaceIntegration = comportInterfaceIntegration;
+        this.cashControlClientInterface = cashControlClientInterface;
     }
 
     @Transactional
@@ -47,6 +52,10 @@ public class PaymentService {
 
     public PayStatusResponse getStatusOfCurrentOperation() {
         return new PayStatusResponse().setPaymentStatus(status).setCurrentMoney(null);
+    }
+
+    public CanDispenseDto canCashOperation() {
+        return new CanDispenseDto().setCanDispense(cashControlClientInterface.canDispenseCoins());
     }
 
     public void reset() {
