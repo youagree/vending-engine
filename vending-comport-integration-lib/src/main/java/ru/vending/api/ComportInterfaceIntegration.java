@@ -32,12 +32,5 @@ public interface ComportInterfaceIntegration {
      * закрывает и чистит порт взаимодействия с портом оплаты
      */
     void paymentCancel(String currentMoney);
-//
-//    //todo dock
-//    void checkRaspberryPort();
-//
-//    //todo dock
-//    void checkKitBoxPort();
-
 
 }
