@@ -2,14 +2,9 @@ package ru.vending.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import ru.vending.dto.CanDispenseDto;
+import ru.vending.dto.CurrentMoneyCountDto;
 import ru.vending.dto.PayStatusResponse;
 import ru.vending.dto.PaymentCancelStatus;
 import ru.vending.service.PaymentService;
@@ -28,17 +23,23 @@ public class PaymentController {
         this.productService = productService;
     }
 
+    @GetMapping("/dispense/tubes")
+    @ResponseStatus(HttpStatus.OK)
+    public Integer getChannelsCashSum() {
+        return paymentService.getChannelsSum();
+    }
+
     @PostMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public void sendIdAndPaymentTypeOnPaymentModule (@PathVariable Long id, @RequestParam String paymentType) {
+    public void sendIdAndPaymentTypeOnPaymentModule (@PathVariable Long id, @RequestBody String payMethod) {
         paymentService.reset();
-        productService.sendIdAndPaymentType(id, paymentType);
+        productService.sendIdAndPaymentType(id, payMethod);
     }
 
     @GetMapping("/{id}/payStatus")
     @ResponseStatus(HttpStatus.OK)
-    public PayStatusResponse getCurrentMoneyOnPaymentModule (@RequestParam Integer price) {
-        return paymentService.paymentComportMoneyListenerWithCashlessPayment(price);
+    public PayStatusResponse getCurrentMoneyOnPaymentModule (@PathVariable Long id) {
+        return paymentService.paymentComportMoneyListenerWithCashlessPayment(id);
     }
 
     @GetMapping("/{id}/status")
@@ -49,8 +50,8 @@ public class PaymentController {
 
     @PostMapping("/paymentCancel")
     @ResponseStatus(HttpStatus.OK)
-    public PaymentCancelStatus paymentCancel(@RequestParam String currentMoneyCount) {
-        paymentService.paymentCancel(currentMoneyCount);
+    public PaymentCancelStatus paymentCancel(@RequestBody CurrentMoneyCountDto currentMoneyCount) {
+        paymentService.paymentCancel(currentMoneyCount.getCurrentMoneyCount().toString());
         return new PaymentCancelStatus().setPaymentCancelStatus("payment canceled");
     }
 
@@ -58,5 +59,17 @@ public class PaymentController {
     @ResponseStatus(HttpStatus.OK)
     public CanDispenseDto paymentCancel() {
         return paymentService.canCashOperation();
+    }
+
+    @GetMapping("/tubesStatus")
+    @ResponseStatus(HttpStatus.OK)
+    public Integer tubesStatus() {
+        return paymentService.getChannelsSum();
+    }
+
+    @PostMapping("/dispense/{dispenseValue}")
+    @ResponseStatus(HttpStatus.OK)
+    public String dispenseCash(@PathVariable Integer dispenseValue) {
+        return paymentService.dispenseCash(dispenseValue);
     }
 }

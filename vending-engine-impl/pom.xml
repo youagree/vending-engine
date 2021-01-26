@@ -67,7 +67,17 @@
             <artifactId>lombok</artifactId>
             <scope>provided</scope>
         </dependency>
+
+        <!-- mdb cash control lib -->
+        <dependency>
+            <groupId>ru.cash</groupId>
+            <artifactId>mdb-cash-control</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+        </dependency>
     </dependencies>
-
-
 </project>

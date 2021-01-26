@@ -41,4 +41,14 @@ public class ComportService implements ComportInterfaceIntegration {
     public void paymentCancel(String currentMoney) {
         kitBoxComport.paymentCancel(currentMoney);
     }
+
+//    @Override
+//    public void checkRaspberryPort() {
+//        spiralMotorComport.checkRaspberryPort();
+//    }
+//
+//    @Override
+//    public void checkKitBoxPort() {
+//        kitBoxComport.checkKitBoxPort();
+//    }
 }
