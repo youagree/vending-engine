@@ -16,7 +16,6 @@ import java.util.concurrent.Executor;
 public class AsyncConfig implements AsyncConfigurer {
 
     private int corePoolSize;
-
     private int maxPoolSize;
 
     @Override

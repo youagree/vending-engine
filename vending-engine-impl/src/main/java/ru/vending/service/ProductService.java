@@ -76,5 +76,4 @@ public class ProductService {
             log.info("Price and payment type sended in comport: price {}, payment type {}", product.getPrice(), paymentType);
         }
     }
-
 }

@@ -46,9 +46,14 @@ public class PaymentService {
                 .setPaymentStatus(status);
     }
 
-    public void paymentCancel(String currentMoney) {
-        comportInterfaceIntegration.paymentCancel(currentMoney);
-        log.info("Payment cancel completed!");
+    public String paymentCancel(String currentMoney) {
+        if (cashControlClientInterface.paymentCancel(Integer.parseInt(currentMoney))) {
+            log.info("Payment cancel completed!");
+            return "Payment cancel completed!";
+        } else {
+            return "Error! Payment not canceled!";
+        }
+
     }
 
     public PayStatusResponse getStatusOfCurrentOperation() {

@@ -41,5 +41,4 @@ public class CategoriesService {
         log.info("Founded category: {}", category.getName());
         return categoryMapper.map(category);
     }
-
 }

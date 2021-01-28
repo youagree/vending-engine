@@ -51,8 +51,8 @@ public class PaymentController {
     @PostMapping("/paymentCancel")
     @ResponseStatus(HttpStatus.OK)
     public PaymentCancelStatus paymentCancel(@RequestBody CurrentMoneyCountDto currentMoneyCount) {
-        paymentService.paymentCancel(currentMoneyCount.getCurrentMoneyCount().toString());
-        return new PaymentCancelStatus().setPaymentCancelStatus("payment canceled");
+        return new PaymentCancelStatus().
+                setPaymentCancelStatus(paymentService.paymentCancel(currentMoneyCount.getCurrentMoneyCount().toString()));
     }
 
     @GetMapping("/dispense/canDispense")
