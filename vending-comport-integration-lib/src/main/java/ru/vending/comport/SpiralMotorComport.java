@@ -51,4 +51,11 @@ public class SpiralMotorComport {
         log.info("Raspberry comport is closed");
         return new String(bytesOnPort);
     }
+
+    @SneakyThrows
+    public void checkRaspberryPort() {
+        if (raspberryComport.isOpened()) {
+            raspberryComport.closePort();
+        }
+    }
 }

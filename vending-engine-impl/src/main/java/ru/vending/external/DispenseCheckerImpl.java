@@ -2,12 +2,14 @@
 package ru.vending.external;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import ru.cash.control.client.CanDispenseChecker;
 import ru.vending.entity.Product;
 import ru.vending.repository.ProductRepository;
 
 import java.util.stream.Collectors;
 
+@Component
 public class DispenseCheckerImpl implements CanDispenseChecker<Integer> {
     @Autowired
     ProductRepository productRepository;

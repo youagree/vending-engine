@@ -1,5 +1,6 @@
 package ru.vending.controller;
 
+import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -20,10 +21,10 @@ public class MotorController {
         this.productService = productService;
     }
 
+    @SneakyThrows
     @PostMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public MotorStatusResponse initMotorsForProductById(@PathVariable Long id) {
-        motorsService.activateMotorsByChoiceNumber(productService.getProductById(id).getChoiceNumber(), id);
         return new MotorStatusResponse().setMotorStatus("s");
     }
 }

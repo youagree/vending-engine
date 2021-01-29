@@ -20,8 +20,10 @@ public class KitBoxComport {
     @SneakyThrows(value = {SerialPortException.class, InterruptedException.class})
     public void sendDataOnKitBoxComport(String data) {
         log.info("Current data: {}", data);
-        kitBoxComport.openPort();
-        log.info("KitBox comport is opened");
+        if (kitBoxComport.isOpened()) {
+            kitBoxComport.openPort();
+            log.info("KitBox comport is opened");
+        }
         kitBoxComport.setParams(SerialPort.BAUDRATE_9600, SerialPort.DATABITS_8, SerialPort.STOPBITS_1, SerialPort.PARITY_NONE);
         log.info("KitBox comport settings: 9600.8.1.NONE");
         kitBoxComport.writeBytes(data.getBytes());
@@ -34,7 +36,9 @@ public class KitBoxComport {
     @SneakyThrows(value = {SerialPortException.class, InterruptedException.class})
     public String kitBoxResponseWaiting() {
         byte[] bytesOnPort = null;
-        kitBoxComport.openPort();
+        if (!kitBoxComport.isOpened()) {
+            kitBoxComport.openPort();
+        }
         log.info("KitBox comport is opened");
         kitBoxComport.setParams(SerialPort.BAUDRATE_9600, SerialPort.DATABITS_8, SerialPort.STOPBITS_1, SerialPort.PARITY_NONE);
         log.info("KitBox comport settings: 9600.8.1.NONE");
@@ -74,5 +78,12 @@ public class KitBoxComport {
         log.info("KitBox comport flush is completed");
         kitBoxComport.closePort();
         log.info("KitBox comport is closed");
+    }
+
+    @SneakyThrows
+    public void checkKitBoxPort() {
+        if (kitBoxComport.isOpened()) {
+            kitBoxComport.closePort();
+        }
     }
 }

@@ -1,19 +1,14 @@
 package ru.vending;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
-import org.springframework.web.client.RestTemplate;
 
+@Slf4j
 @SpringBootApplication
 public class VendingEngineApplication {
-
-    @Bean
-    public RestTemplate getRestTemplate() {
-        return new RestTemplate();
-    }
-
     public static void main(String[] args) {
         SpringApplication.run(VendingEngineApplication.class, args);
+        log.info("Application successfully start");
     }
 }

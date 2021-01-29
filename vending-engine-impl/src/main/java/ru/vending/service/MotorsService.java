@@ -24,7 +24,7 @@ public class MotorsService {
     }
 
     @Transactional
-    public String activateMotorsByChoiceNumber(Integer choiceNumber, Long id) {
+    public String activateMotorsByChoiceNumber(Integer choiceNumber, Long id) { //todo Появится новая интеграция (возможно)
         comportInterfaceIntegration.spiralMotorInput(String.valueOf(choiceNumber));
         log.info("Send choice number of product in motors comport! Choice number: {}, ID: {}", choiceNumber, id);
         if (comportInterfaceIntegration.spiralMotorWaiting().equals("1")) {
