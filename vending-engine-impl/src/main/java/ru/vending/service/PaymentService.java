@@ -50,10 +50,8 @@ public class PaymentService {
         if (cashControlClientInterface.paymentCancel(Integer.parseInt(currentMoney))) {
             log.info("Payment cancel completed!");
             return "Payment cancel completed!";
-        } else {
-            return "Error! Payment not canceled!";
         }
-
+        return "Error! Payment not canceled!";
     }
 
     public PayStatusResponse getStatusOfCurrentOperation() {

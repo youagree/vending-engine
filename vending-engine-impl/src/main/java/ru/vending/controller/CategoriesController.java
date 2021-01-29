@@ -15,7 +15,7 @@ import java.util.List;
 public class CategoriesController {
 
     private final CategoriesService categoriesService;
-    private PaymentService paymentService;
+    private final PaymentService paymentService;
 
     @Autowired
     public CategoriesController(CategoriesService categoriesService, PaymentService paymentService) {
