@@ -8,6 +8,4 @@ import ru.vending.entity.Product;
 public interface ProductMapper {
 
     ProductDto mapToDto(Product product);
-
-
 }
