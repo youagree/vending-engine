@@ -42,6 +42,11 @@ public class PaymentService {
         if (currentMoneyCount >= product.getPrice()) {
             status = "s";
         }
+
+        if (currentMoneyCount == -1) {
+            status = "e";
+            return new PayStatusResponse().setCurrentMoney("0").setPaymentStatus(status);
+        }
         return new PayStatusResponse().setCurrentMoney(valueOf(currentMoneyCount))
                 .setPaymentStatus(status);
     }

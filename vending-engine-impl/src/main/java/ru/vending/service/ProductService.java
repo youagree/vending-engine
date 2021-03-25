@@ -7,6 +7,7 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.cash.control.client.CashControlClientInterface;
+import ru.cash.control.client.CashlessControlClientInterface;
 import ru.vending.api.ComportInterfaceIntegration;
 import ru.vending.dto.ProductDto;
 import ru.vending.entity.Product;
@@ -25,16 +26,18 @@ public class ProductService {
     private ProductRepository productRepository;
     private ComportInterfaceIntegration comportInterfaceIntegration;
     private CashControlClientInterface cashControlClientInterface;
+    private CashlessControlClientInterface cashlessControlClientInterface;
 
     @Autowired
     public ProductService(ProductMapper productMapper,
                           ProductRepository productRepository,
                           ComportInterfaceIntegration comportInterfaceIntegration,
-                          CashControlClientInterface cashControlClientInterface) {
+                          CashControlClientInterface cashControlClientInterface, CashlessControlClientInterface cashlessControlClientInterface) {
         this.productMapper = productMapper;
         this.productRepository = productRepository;
         this.comportInterfaceIntegration = comportInterfaceIntegration;
         this.cashControlClientInterface = cashControlClientInterface;
+        this.cashlessControlClientInterface = cashlessControlClientInterface;
     }
 
     @Transactional(readOnly = true)
@@ -72,8 +75,15 @@ public class ProductService {
             log.info("Sorry! This product is out of stock");
             throw new Exception("Count is 0");
         } else {
-            cashControlClientInterface.startBuying(product.getPrice());
-            log.info("Price and payment type sended in comport: price {}, payment type {}", product.getPrice(), paymentType);
+            if (paymentType.equals("n")) {
+                cashControlClientInterface.startBuying(product.getPrice());
+                log.info("Price and payment type sended in comport: price {}, payment type {}", product.getPrice(), paymentType);
+            }
+
+            if (paymentType.equals("b")) {
+                cashlessControlClientInterface.startCashlessOperation(product.getPrice());
+                log.info("Price and payment type sended in comport: price {}, payment type {}", product.getPrice(), paymentType);
+            }
         }
     }
 }

@@ -3,10 +3,7 @@ package ru.vending.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import ru.vending.dto.CanDispenseDto;
-import ru.vending.dto.CurrentMoneyCountDto;
-import ru.vending.dto.PayStatusResponse;
-import ru.vending.dto.PaymentCancelStatus;
+import ru.vending.dto.*;
 import ru.vending.service.PaymentService;
 import ru.vending.service.ProductService;
 
@@ -31,9 +28,9 @@ public class PaymentController {
 
     @PostMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public void sendIdAndPaymentTypeOnPaymentModule (@PathVariable Long id, @RequestBody String payMethod) {
+    public void sendIdAndPaymentTypeOnPaymentModule (@PathVariable Long id, @RequestBody PaymentDto payMethod) {
         paymentService.reset();
-        productService.sendIdAndPaymentType(id, payMethod);
+        productService.sendIdAndPaymentType(id, payMethod.getPayMethod());
     }
 
     @GetMapping("/{id}/payStatus")
