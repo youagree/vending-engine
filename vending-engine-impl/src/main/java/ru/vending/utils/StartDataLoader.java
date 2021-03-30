@@ -26,6 +26,7 @@ public class StartDataLoader implements CommandLineRunner {
     public void run(String... args) throws Exception {
         Resource resource = new ClassPathResource("testdata/insert-test-data-script.sql");
         ResourceDatabasePopulator populator = new ResourceDatabasePopulator(resource);
+        populator.setSqlScriptEncoding("UTF-8");
         populator.execute(Objects.requireNonNull(jdbcTemplate.getDataSource()));
         log.info("Start data uploaded!");
     }
